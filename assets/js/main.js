@@ -23,7 +23,7 @@ if (navClose) {
 /*=============== REMOVE MENU MOBILE ===============*/
 const navLink = document.querySelectorAll('.nav__link')
 
-const linkAction = () =>{
+const linkAction = () => {
     const navMenu = document.getElementById('nav-menu')
     // When we click on each nav__link, we remove the show-menu class
     navMenu.classList.remove('show-menu')
@@ -31,9 +31,9 @@ const linkAction = () =>{
 navLink.forEach(n => n.addEventListener('click', linkAction))
 
 /*=============== ADD SHADOW HEADER ===============*/
-const shadowHeader = () =>{
+const shadowHeader = () => {
     const header = document.getElementById('header')
-    // Add a class if the bottom offset is greater than 50 of the viewport
+    // Add a class if the scrollY is greater than 50
     this.scrollY >= 50 ? header.classList.add('shadow-header') 
                        : header.classList.remove('shadow-header')
 }
@@ -44,36 +44,36 @@ const swiperPopular = new Swiper('.popular__swiper', {
     loop: true,
     grabCursor: true,
     slidesPerView: 'auto',
-    centeredSlides:'auto',
-  })
-/*=============== SHOW SCROLL UP ===============*/
+    centeredSlides: 'auto',
+})
 
-const scrollUp = () =>{
-	const scrollUp = document.getElementById('scroll-up')
-    // When the scroll is higher than 350 viewport height, add the show-scroll class to the a tag with the scrollup class
-	this.scrollY >= 350 ? scrollUp.classList.add('show-scroll')
-						: scrollUp.classList.remove('show-scroll')
+/*=============== SHOW SCROLL UP ===============*/
+const scrollUp = () => {
+    const scrollUp = document.getElementById('scroll-up')
+    // When the scroll is higher than 350 viewport height, add the show-scroll class to the scroll-up element
+    this.scrollY >= 350 ? scrollUp.classList.add('show-scroll')
+                        : scrollUp.classList.remove('show-scroll')
 }
 window.addEventListener('scroll', scrollUp)
 
 /*=============== SCROLL SECTIONS ACTIVE LINK ===============*/
 const sections = document.querySelectorAll('section[id]')
     
-const scrollActive = () =>{
-  	const scrollDown = window.scrollY
+const scrollActive = () => {
+    const scrollDown = window.scrollY
 
-	sections.forEach(current =>{
-		const sectionHeight = current.offsetHeight,
-			  sectionTop = current.offsetTop - 58,
-			  sectionId = current.getAttribute('id'),
-			  sectionsClass = document.querySelector('.nav__menu a[href*=' + sectionId + ']')
+    sections.forEach(current => {
+        const sectionHeight = current.offsetHeight,
+              sectionTop = current.offsetTop - 58,
+              sectionId = current.getAttribute('id'),
+              sectionsClass = document.querySelector('.nav__menu a[href*=' + sectionId + ']')
 
-		if(scrollDown > sectionTop && scrollDown <= sectionTop + sectionHeight){
-			sectionsClass.classList.add('active-link')
-		}else{
-			sectionsClass.classList.remove('active-link')
-		}                                                    
-	})
+        if(scrollDown > sectionTop && scrollDown <= sectionTop + sectionHeight){
+            sectionsClass.classList.add('active-link')
+        } else {
+            sectionsClass.classList.remove('active-link')
+        }                                                    
+    })
 }
 window.addEventListener('scroll', scrollActive)
 
@@ -94,10 +94,14 @@ sr.reveal(`.about__data, .recipe__list, .contact__data`, {origin: 'right'})
 sr.reveal(`.about__img, .recipe__img, .contact__image`, {origin: 'left'})
 sr.reveal(`.products__card`, {interval: 100})
 
-
 /*=============== EmailJS ===============*/
 const emailInput = document.getElementById('email');
 const formMessage = document.getElementById('form-message');
+
+// Load EmailJS configuration from environment variables
+const emailServiceID    = process.env.EMAILJS_SERVICE_ID;
+const emailTemplateID1  = process.env.EMAILJS_TEMPLATE_ID_1;
+const emailTemplateID2  = process.env.EMAILJS_TEMPLATE_ID_2;
 
 // Real-time email validation
 emailInput.addEventListener('input', function() {
@@ -108,7 +112,7 @@ emailInput.addEventListener('input', function() {
         formMessage.textContent = '';
         formMessage.style.display = 'none';
     } else if (!emailRegex.test(email)) {
-        formMessage.textContent =  "Please enter a valid email address";
+        formMessage.textContent = "Please enter a valid email address";
         formMessage.style.color = 'red';
         formMessage.style.display = 'block';
     } else {
@@ -132,36 +136,30 @@ document.getElementById('newsletter-form').addEventListener('submit', function(e
         return;
     }
 
-    // EmailJS sending logic
-    emailjs.send('service_o7bitcp', 'template_tk0dd8b', {
-        user_email: email
-    }).then(
-        () => emailjs.send('service_o7bitcp', 'template_8z15503', {
-            user_email: email
-        })
-    ).then(
-        response => {
-            formMessage.textContent = 'Thank you for subscribing!';
-            formMessage.style.color = 'green';
-            formMessage.style.display = 'block';
-            this.reset();
-            
-            // Clear message after 2 seconds
-            setTimeout(() => {
-                formMessage.textContent = '';
-                formMessage.style.display = 'none';
-            }, 2000);
-        },
-        error => {
-            console.error('Subscription failed:', error);
-            formMessage.textContent = 'Subscription failed. Please try again.';
-            formMessage.style.color = 'red';
-            formMessage.style.display = 'block';
-        }
-    );
+    // EmailJS sending logic using environment variables for keys
+    emailjs.send(emailServiceID, emailTemplateID1, { user_email: email })
+    .then(() => emailjs.send(emailServiceID, emailTemplateID2, { user_email: email }))
+    .then(response => {
+        formMessage.textContent = 'Thank you for subscribing!';
+        formMessage.style.color = 'green';
+        formMessage.style.display = 'block';
+        this.reset();
+
+        // Clear message after 2 seconds
+        setTimeout(() => {
+            formMessage.textContent = '';
+            formMessage.style.display = 'none';
+        }, 2000);
+    })
+    .catch(error => {
+        console.error('Subscription failed:', error);
+        formMessage.textContent = 'Subscription failed. Please try again.';
+        formMessage.style.color = 'red';
+        formMessage.style.display = 'block';
+    });
 });
 
-// Phone Feature with Confirmation
+/*=============== Phone Feature with Confirmation ===============*/
 document.addEventListener('DOMContentLoaded', function() {
     const phoneButtons = document.querySelectorAll('.products__button');
     const phoneNumber = '+91-6360170572'; // REPLACE WITH ACTUAL NUMBER
@@ -170,16 +168,16 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', function(e) {
             const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
             
-            if(isMobile) {
+            if (isMobile) {
                 // Mobile: Confirm before calling
-                if(confirm('Call Kritika Home Food?\n' + phoneNumber)) {
+                if (confirm('Call Kritika Home Food?\n' + phoneNumber)) {
                     window.location.href = 'tel:' + phoneNumber;
                 }
             } else {
                 // Desktop/Tablet: Smooth scroll to contact
                 e.preventDefault();
                 const contactSection = document.getElementById('contact');
-                if(contactSection) {
+                if (contactSection) {
                     contactSection.scrollIntoView({ behavior: 'smooth' });
                 } else {
                     console.warn('Contact section not found!');
@@ -188,3 +186,32 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+/*=============== LAZY LOADING IMAGES ===============*/
+document.addEventListener("DOMContentLoaded", function() {
+    const lazyImages = document.querySelectorAll('img[data-src]');
+    
+    if ('IntersectionObserver' in window) {
+        const lazyImageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const lazyImage = entry.target;
+                    lazyImage.src = lazyImage.dataset.src;
+                    lazyImage.removeAttribute('data-src');
+                    observer.unobserve(lazyImage);
+                }
+            });
+        });
+        
+        lazyImages.forEach(image => {
+            lazyImageObserver.observe(image);
+        });
+    } else {
+        // Fallback for browsers that do not support IntersectionObserver
+        lazyImages.forEach(image => {
+            image.src = image.dataset.src;
+            image.removeAttribute('data-src');
+        });
+    }
+});
+
