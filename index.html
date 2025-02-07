@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <!--=============== FAVICON ===============-->
+   <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon">
+
+   <!--=============== REMIXICONS ===============-->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.5.0/remixicon.css">
+
+   <!--=============== SWIPER CSS ===============-->
+   <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+
+   <!--=============== EMAILJS ===============-->
+   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+   <!--=============== CSS ===============-->
+   <link rel="stylesheet" href="assets/css/styles.css">
+
+   <title>Responsive pizza website - Bedimcode</title>
+</head>
+
+<body>
+   <!--==================== HEADER ====================-->
+   <header class="header" id="header">
+      <nav class="nav container">
+         <a href="#" class="nav__logo">
+            <img src="assets/img/logo.png" alt="image" style="width: 35px;">
+            Kritika Home Food
+         </a>
+
+         <div class="nav__menu" id="nav-menu">
+            <ul class="nav__list">
+               <li>
+                  <a href="#home" class="nav__link active-link">Home</a>
+               </li>
+
+               <li>
+                  <a href="#about" class="nav__link">About us</a>
+               </li>
+
+               <li>
+                  <a href="#popular" class="nav__link">Popular Chapati</a>
+               </li>
+
+               <li>
+                  <a href="#products" class="nav__link">Products</a>
+               </li>
+
+               <li>
+                  <a href="#contact" class="nav__link">Contact</a>
+               </li>
+            </ul>
+
+            <!-- close button -->
+            <div class="nav__close" id="nav-close">
+               <i class="ri-close-large-line"></i>
+            </div>
+         </div>
+
+         <!-- Toggle button -->
+         <div class="nav__toggle" id="nav-toggle">
+            <i class="ri-apps-2-fill"></i>
+         </div>
+      </nav>
+   </header>
+
+   <!--==================== MAIN ====================-->
+   <main class="main">
+      <!--==================== HOME ====================-->
+      <section class="home section" id="home">
+         <div class="home__container container grid">
+            <div class="home__data">
+               <h1 class="home__title">Soft & Fresh Chapatis <br> Just Like Home</h1>
+
+               <p class="home__description">
+                  Supplying Bangalore's industries with hygienic, freshly-made chapatis daily. <br> <br>
+                  Customizable bulk packaging with FSSAI-certified production.
+               </p>
+
+               <a href="#contact" class="button">Order Now &nbsp; <i class="ri-contacts-fill"></i></a>
+
+               <!-- <img src="assets/img/sticker-pizza.svg" alt="image" class="home__sticker-1"> -->
+               <!-- <img src="assets/img/sticker-leaf.svg" alt="image" class="home__sticker-2"> -->
+            </div>
+
+            <div class="home__images">
+
+               <img src="assets/img/resized_image_1-removebg-preview.png" alt="image" class="home__board">
+               <img src="assets/img/roti.png" alt="image" class="home__chapati">
+
+               <img src="assets/img/recipe-cheese.png" alt="image" class="home__ingredient home__leaf-1">
+               <img src="assets/img/recipe-flour.png" alt="image" class="home__ingredient home__leaf-2">
+               <img src="assets/img/salts-removebg-preview.png" alt="image" class="home__ingredient home__pepperoni">
+               
+               <img src="assets/img/images-removebg-preview.png" alt="image" class="home__ingredient home__mushroom">
+               <img src="assets/img/Ghee-removebg-preview.png" alt="image" class="home__ingredient home__olive">
+               <img src="assets/img/images-removebg-preview.png" alt="image" class="home__ingredient home__tomato">
+            </div>
+
+         </div>
+      </section>
+
+      <!--==================== ABOUT ====================-->
+      <section class="about section" id="about">
+         <div class="about__container container grid">
+            <div class="about__data">
+               <h2 class="section__title">
+                  Learn More about us
+               </h2>
+
+               <h4>Our mission</h4>
+               <br>
+
+               <p class="about__description">
+                  At Kritika Home Food, we ensure no one misses the warmth of home-cooked food. Our mission is to
+                  provide fresh, healthy chapatis that bring comfort and nourishment to every meal, wherever you are.
+               </p>
+
+               <h4 class="about__h4">Our value</h4>
+               <p class="about__description two">
+                  we provide fresh, healthy chapatis that bring the warmth of home-cooked food, ensuring comfort and
+                  nourishment in every meal.
+               </p>
+
+               
+
+               <h4 class="about__add">Kritika Home Food PRIVATE LIMITED <br>
+                  Building No: 250, 3rd Cross Rd, Vidyamanya Nagar, Bengaluru, Karnataka 560091 <br>
+                  Cusomer Care No: +91 6360170572
+               </h4>
+
+               
+
+               <a href="https://maps.app.goo.gl/AkLpQW6JtEVKUnh87" class="button about__btn" target="_blank">
+                  Find Us Here &nbsp; <i class="ri-map-pin-line"></i>
+                </a>
+                
+
+               <!-- <img src="assets/img/sticker-cheese.svg" alt="image" class="about__sticker"> -->
+            </div>
+
+            <img src="assets/img/aboutImage.png" alt="image" class="about__img">
+
+         </div>
+      </section>
+
+      <!--==================== POPULAR ====================-->
+      <section class="popular section" id="popular">
+         <div class="popular__container container grid">
+            <div class="popular__data">
+               <h2 class="section__title">Discover <br> Top Selling Chapati</h2>
+
+               <p class="popular__description">
+                  Take a look at the most popular selling Chapati that our customers are loving right now. 
+               </p>
+            </div>
+
+            <div class="popular__swiper swiper">
+               <img src="assets/img/popular-dish.png" alt="image" class="popular__dish">
+
+               <div class="swiper-wrapper">
+                  <artical class="popular__card swiper-slide">
+                     <img src="assets/img/popular1-removebg-preview.png" alt="image" class="popular__img">
+                     <h3 class="popular__title">Ghee Chapati</h3>
+                  </artical>
+
+                  <artical class="popular__card swiper-slide">
+                     <img src="assets/img/popular1-removebg-preview.png" alt="image" class="popular__img">
+                     <h3 class="popular__title">Yucard Chapati</h3>
+                  </artical>
+
+                  <artical class="popular__card swiper-slide">
+                     <img src="assets/img/popular1-removebg-preview.png" alt="image" class="popular__img">
+                     <h3 class="popular__title">Alloo Paratha</h3>
+                  </artical>
+               </div>
+
+            </div>
+         </div>
+      </section>
+
+      <!--==================== RECIPE ====================-->
+      <section class="recipe section">
+         <h2 class="section__title recipe__title"> Fresh And <br> Natural Ingredients</h2>
+
+         <div class="recipe__container container grid">
+            <div class="recipe__list grid">
+               <div class="recipe__ingredient">
+                  <img src="assets/img/recipe-flour.png" alt="image" class="recipe__image">
+
+                  <div>
+                     <h3 class="recipe__name">Wheat Flore</h3>
+                     <p class="recipe__description">Finely ground whole wheat, rich in fiber and nutrients, ideal for soft chapatis.
+                     </p>
+                  </div>
+               </div>
+
+               <div class="recipe__ingredient">
+                  <img src="assets/img/recipe-cheese.png" alt="image" class="recipe__image">
+
+                  <div>
+                     <h3 class="recipe__name">Cheese</h3>
+                     <p class="recipe__description">A rich, creamy dairy product made from milk, adding flavor and texture to dishes.
+                     </p>
+                  </div>
+               </div>
+
+               <div class="recipe__ingredient">
+                  <img src="assets/img/Ghee-removebg-preview.png" alt="image" class="recipe__image">
+
+                  <div>
+                     <h3 class="recipe__name">Ghee</h3>
+                     <p class="recipe__description"> A clarified butter with a rich aroma and nutty flavor, enhancing taste and nutrition.
+                     </p>
+                  </div>
+               </div>
+
+               <div class="recipe__ingredient">
+                  <img src="assets/img/salts-removebg-preview.png" alt="image" class="recipe__image">
+
+                  <div>
+                     <h3 class="recipe__name">Salt</h3>
+                     <p class="recipe__description">A natural mineral that enhances flavor and balances taste in dishes.
+                     </p>
+                  </div>
+               </div>
+
+               <div class="recipe__ingredient">
+                  <img src="assets/img/images-removebg-preview.png" alt="image" class="recipe__image">
+
+                  <div>
+                     <h3 class="recipe__name">Yogurt</h3>
+                     <p class="recipe__description"> A creamy, probiotic-rich dairy product made by fermenting milk, adding tang and nutrition.
+                     </p>
+                  </div>
+               </div>
+            </div>
+
+            <img src="assets/img/istockphoto-1197134869-612x612-removebg-preview.png" alt="image" class="recipe__img">
+         </div>
+      </section>
+
+      <!--==================== PRODUCTS ====================-->
+      <section class="products section" id="products">
+         <h2 class="section__title">The Ultimate Delight <br>Chapati</h2>
+
+         <div class="products__container container grid">
+            <article class="products__card">
+               <img src="assets/img/popular1-removebg-preview.png" alt="image" class="products__img">
+
+               <h3 class="products__name">Alloo Chapati <br> Paratha</h3>
+               <h4 class="products__price">Per 20 Rs</h4>
+
+               <button class="products__button" aria-label="Contact for order">
+                  <i class="ri-phone-fill"></i>
+               </button>
+            </article>
+
+            <article class="products__card">
+               <img src="assets/img/popular1-removebg-preview.png" alt="image" class="products__img">
+
+               <h3 class="products__name">Butter flavored <br> Chapati</h3>
+               <span class="products__price">Per 18Rs</span>
+
+               <button class="products__button" aria-label="Contact for order">
+                  <i class="ri-phone-fill"></i>
+               </button>
+            </article>
+
+            <article class="products__card">
+               <img src="assets/img/popular1-removebg-preview.png" alt="image" class="products__img">
+
+               <h3 class="products__name">Ghee flavored <br> Chapati</h3>
+               <span class="products__price">Per 25Rs</span>
+
+               <button class="products__button" aria-label="Contact for order">
+                  <i class="ri-phone-fill"></i>
+               </button>
+            </article>
+
+            <article class="products__card">
+               <img src="assets/img/popular1-removebg-preview.png" alt="image" class="products__img">
+
+               <h3 class="products__name">Dahi (Yogurt) mixed <br> Chapati</h3>
+               <span class="products__price">Per 15Rs</span>
+
+               <button class="products__button" aria-label="Contact for order">
+                  <i class="ri-phone-fill"></i>
+               </button>
+            </article>
+
+
+            <article class="products__card">
+               <img src="assets/img/popular1-removebg-preview.png" alt="image" class="products__img">
+
+               <h3 class="products__name">Malabar Paratha (Kerala Style) <br> Chapati</h3>
+               <span class="products__price">Per 12Rs</span>
+
+               <button class="products__button" aria-label="Contact for order">
+                  <i class="ri-phone-fill"></i>
+               </button>
+            </article>
+
+
+            <article class="products__card">
+               <img src="assets/img/popular1-removebg-preview.png" alt="image" class="products__img">
+
+               <h3 class="products__name">Ajwain (Carom Seed) <br> Chapati</h3>
+               <span class="products__price">Per 10Rs</span>
+ 
+               <button class="products__button" aria-label="Contact for order">
+                  <i class="ri-phone-fill"></i>
+               </button>
+            </article>
+
+
+         </div>
+      </section>
+
+      <!--==================== CONTACT ====================-->
+      <section class="contact section" id="contact">
+         <div class="contact__container container grid">
+            <div class="contact__data">
+               <h2 class="section__title">Contact now</h2>
+
+               <div class="contact__info grid">
+                  <div>
+                     <h3 class="contact__title">Write Us</h3>
+
+                     <div class="contact__social">
+                        <a href="https://www.whatsapp.com" target="_blank" class="contact__social-link">
+                           <i class="ri-whatsapp-fill"></i>
+                        </a>
+
+                        <a href="https://www.whatsapp.com" target="_blank" class="contact__social-link">
+                           <i class="ri-messenger-fill"></i>
+                        </a>
+
+                        <a href="https://www.whatsapp.com" target="_blank" class="contact__social-link">
+                           <i class="ri-telegram-2-fill"></i>
+                        </a>
+                     </div>
+                  </div>
+
+                  <div>
+                     <h3 class="contact__title">Delivery</h3>
+
+                     <address class="contact__addresh">
+                        +91 6360170572 <br>
+                        +91 6362753964
+                     </address>
+                  </div>
+
+                  <div>
+                     <h3 class="contact__title">Location</h3>
+
+                     <address class="contact__addresh">
+                        Building No: 91, Ground floor, Netajinagar <br> T.Dasarahalli, Bengaluru-57
+                     </address>
+
+                     <a href="https://maps.app.goo.gl/AkLpQW6JtEVKUnh87" target="_blank" class="contact__map" rel="link">
+                        <i class="ri-map-pin-fill"></i>
+                        <span>View on Map</span>
+                     </a>
+                  </div>
+               </div>
+            </div>
+
+            <div class="contact__image">
+               <img src="assets/img/delvery.png" alt="image" class="contact__img">
+            </div>
+
+            <img src="assets/img/sticker-tomato.svg" alt="image" class="contact__sticker-1">
+            <img src="assets/img/sticker-mushroom.svg" alt="image" class="contact__sticker-2">
+            <img src="assets/img/sticker-onion.svg" alt="image" class="contact__sticker-3">
+
+         </div>
+      </section>
+   </main>
+
+   <!--==================== FOOTER ====================-->
+   <footer class="footer">
+      <div class="footer__container container grid">
+         <a href="#" class="footer__logo">Kritika Home Food</a>
+
+         <div class="footer__content grid">
+            <div>
+               <h3 class=footer__title>Social</h3>
+
+               <div class="footer__social">
+                  <a href="https://www.facebook.com/Google/" target="_blank" class="footer__social-link">
+                     <i class="ri-facebook-circle-fill"></i>
+                  </a>
+
+                  <a href="https://www.instagram.com/google/" target="_blank" class="footer__social-link">
+                     <i class="ri-instagram-fill"></i>
+                  </a>
+
+                  <a href="https://twitter.com/Google" target="_blank" class="footer__social-link">
+                     <i class="ri-twitter-x-fill"></i>
+                  </a>
+               </div>
+            </div>
+
+            <div>
+               <h3 class=footer__title>Payment Methods</h3>
+
+               <div class="footer__pay">
+                  <img src="assets/img/footer-card-1.png" alt="image" class="footer__pay-img">
+                  <img src="assets/img/footer-card-2.png" alt="image" class="footer__pay-img">
+                  <img src="assets/img/footer-card-3.png" alt="image" class="footer__pay-img">
+                  <img src="assets/img/footer-card-4.png" alt="image" class="footer__pay-img">
+
+               </div>
+            </div>
+
+            <div>
+               <h3 class=footer__title>Subscribe for Discounts</h3>
+
+               <form id="newsletter-form" class="footer__form">
+                  <input type="email" id="email" placeholder="Enter your Email" class="footer__input" required>
+                  <button type="submit" class="footer__button button">Subscribe</button>
+               </form>
+               <p id="form-message" class="form-message"></p>
+
+            </div>
+         </div>
+      </div>
+
+      <span class="footer__copy">
+         &#169; Kritika Home Food All Rights Reserved
+      </span>
+
+   </footer>
+
+   <!--========== SCROLL UP ==========-->
+   <a href="#" class="scrollup" id="scroll-up">
+      <i class="ri-arrow-up-line"></i>
+   </a>
+
+   <!--=============== SCROLLREVEAL ===============-->
+   <script src="assets/js/scrollreveal.min.js"></script>
+
+   <!--=============== SWIPER JS ===============-->
+   <script src="assets/js/swiper-bundle.min.js"></script>
+
+   <!--=============== MAIN JS ===============-->
+   <script src="assets/js/main.js"></script>
+</body>
+
+</html>
