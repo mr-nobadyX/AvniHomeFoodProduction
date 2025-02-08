@@ -1,6 +1,7 @@
 import Swiper from 'swiper/bundle';
 import 'swiper/css/bundle';
-import emailjs from '@emailjs/browser'; // Import EmailJS as well
+import ScrollReveal from 'scrollreveal';
+import emailjs from '@emailjs/browser';
 
 // Initialize EmailJS
 emailjs.init(process.env.EMAILJS_PUBLIC_KEY || "_1x8c2wIGn-ACFKW2");
@@ -29,7 +30,7 @@ const navLink = document.querySelectorAll('.nav__link');
 
 const linkAction = () => {
     const navMenu = document.getElementById('nav-menu');
-    // When we click on each nav__link, we remove the show-menu class
+    // When we click on each nav__link, remove the show-menu class
     navMenu.classList.remove('show-menu');
 };
 navLink.forEach(n => n.addEventListener('click', linkAction));
@@ -37,14 +38,14 @@ navLink.forEach(n => n.addEventListener('click', linkAction));
 /*=============== ADD SHADOW HEADER ===============*/
 const shadowHeader = () => {
     const header = document.getElementById('header');
-    // Add a class if the window's scrollY is greater than 50
+    // Use window.scrollY instead of this.scrollY
     window.scrollY >= 50 ? header.classList.add('shadow-header')
                          : header.classList.remove('shadow-header');
 };
 window.addEventListener('scroll', shadowHeader);
 
 /*=============== SWIPER POPULAR ===============*/
-// Check if there are enough slides for loop mode
+// Get slides from the Swiper container and enable loop only if there are enough slides.
 const swiperSlides = document.querySelectorAll('.popular__swiper .swiper-slide');
 const enableLoop = swiperSlides.length > 1;
 
@@ -53,7 +54,14 @@ const swiperPopular = new Swiper('.popular__swiper', {
     grabCursor: true,
     slidesPerView: 'auto',
     centeredSlides: true,
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
 });
+if (!enableLoop) {
+    console.warn("Swiper Loop Warning: Not enough slides for loop mode. Loop has been disabled.");
+}
 
 /*=============== SHOW SCROLL UP ===============*/
 const scrollUpHandler = () => {
@@ -65,7 +73,7 @@ window.addEventListener('scroll', scrollUpHandler);
 
 /*=============== SCROLL SECTIONS ACTIVE LINK ===============*/
 const sections = document.querySelectorAll('section[id]');
-    
+
 const scrollActive = () => {
     const scrollDown = window.scrollY;
     sections.forEach(current => {
@@ -78,7 +86,7 @@ const scrollActive = () => {
             sectionsClass.classList.add('active-link');
         } else {
             sectionsClass.classList.remove('active-link');
-        }                                                    
+        }
     });
 };
 window.addEventListener('scroll', scrollActive);
@@ -89,7 +97,7 @@ const sr = ScrollReveal({
     distance: '60px',
     duration: 2500,
     delay: 300,
-    // reset: true // animation repeat (uncomment if desired)
+    // reset: true // uncomment if you want animations to repeat
 });
 
 sr.reveal(`.home__data, .popular__container, .footer`);
@@ -167,7 +175,7 @@ document.getElementById('newsletter-form').addEventListener('submit', function(e
 /*=============== Phone Feature with Confirmation ===============*/
 document.addEventListener('DOMContentLoaded', function() {
     const phoneButtons = document.querySelectorAll('.products__button');
-    const phoneNumber = '+91-6360170572'; // REPLACE WITH ACTUAL NUMBER
+    const phoneNumber = '+91-6360170572'; // Replace with actual number
     
     phoneButtons.forEach(button => {
         button.addEventListener('click', function(e) {
