@@ -1,83 +1,87 @@
-import Swiper from 'swiper';
+import Swiper from 'swiper/bundle';
+import 'swiper/css/bundle';
+import emailjs from '@emailjs/browser'; // Import EmailJS as well
 
 // Initialize EmailJS
 emailjs.init(process.env.EMAILJS_PUBLIC_KEY || "_1x8c2wIGn-ACFKW2");
 
 /*=============== SHOW MENU ===============*/
 const navMenu = document.getElementById('nav-menu'),
-    navToggle = document.getElementById('nav-toggle'),
-    navClose = document.getElementById('nav-close')
+      navToggle = document.getElementById('nav-toggle'),
+      navClose = document.getElementById('nav-close');
 
 /* Menu show */
 if (navToggle) {
     navToggle.addEventListener('click', () => {
-        navMenu.classList.add('show-menu')
-    })
+        navMenu.classList.add('show-menu');
+    });
 }
 
 /* Menu hidden */
 if (navClose) {
     navClose.addEventListener('click', () => {
-        navMenu.classList.remove('show-menu')
-    })
+        navMenu.classList.remove('show-menu');
+    });
 }
 
 /*=============== REMOVE MENU MOBILE ===============*/
-const navLink = document.querySelectorAll('.nav__link')
+const navLink = document.querySelectorAll('.nav__link');
 
 const linkAction = () => {
-    const navMenu = document.getElementById('nav-menu')
+    const navMenu = document.getElementById('nav-menu');
     // When we click on each nav__link, we remove the show-menu class
-    navMenu.classList.remove('show-menu')
-}
-navLink.forEach(n => n.addEventListener('click', linkAction))
+    navMenu.classList.remove('show-menu');
+};
+navLink.forEach(n => n.addEventListener('click', linkAction));
 
 /*=============== ADD SHADOW HEADER ===============*/
 const shadowHeader = () => {
-    const header = document.getElementById('header')
-    // Add a class if the scrollY is greater than 50
-    this.scrollY >= 50 ? header.classList.add('shadow-header') 
-                       : header.classList.remove('shadow-header')
-}
-window.addEventListener('scroll', shadowHeader)
+    const header = document.getElementById('header');
+    // Add a class if the window's scrollY is greater than 50
+    window.scrollY >= 50 ? header.classList.add('shadow-header')
+                         : header.classList.remove('shadow-header');
+};
+window.addEventListener('scroll', shadowHeader);
 
 /*=============== SWIPER POPULAR ===============*/
+// Check if there are enough slides for loop mode
+const swiperSlides = document.querySelectorAll('.popular__swiper .swiper-slide');
+const enableLoop = swiperSlides.length > 1;
+
 const swiperPopular = new Swiper('.popular__swiper', {
-    loop: true,
+    loop: enableLoop,
     grabCursor: true,
     slidesPerView: 'auto',
-    centeredSlides: 'auto',
-})
+    centeredSlides: true,
+});
 
 /*=============== SHOW SCROLL UP ===============*/
-const scrollUp = () => {
-    const scrollUp = document.getElementById('scroll-up')
-    // When the scroll is higher than 350 viewport height, add the show-scroll class to the scroll-up element
-    this.scrollY >= 350 ? scrollUp.classList.add('show-scroll')
-                        : scrollUp.classList.remove('show-scroll')
-}
-window.addEventListener('scroll', scrollUp)
+const scrollUpHandler = () => {
+    const scrollUpElement = document.getElementById('scroll-up');
+    window.scrollY >= 350 ? scrollUpElement.classList.add('show-scroll')
+                         : scrollUpElement.classList.remove('show-scroll');
+};
+window.addEventListener('scroll', scrollUpHandler);
 
 /*=============== SCROLL SECTIONS ACTIVE LINK ===============*/
-const sections = document.querySelectorAll('section[id]')
+const sections = document.querySelectorAll('section[id]');
     
 const scrollActive = () => {
-    const scrollDown = window.scrollY
-
+    const scrollDown = window.scrollY;
     sections.forEach(current => {
         const sectionHeight = current.offsetHeight,
               sectionTop = current.offsetTop - 58,
               sectionId = current.getAttribute('id'),
-              sectionsClass = document.querySelector('.nav__menu a[href*=' + sectionId + ']')
+              sectionsClass = document.querySelector('.nav__menu a[href*=' + sectionId + ']');
 
-        if(scrollDown > sectionTop && scrollDown <= sectionTop + sectionHeight){
-            sectionsClass.classList.add('active-link')
+        if (scrollDown > sectionTop && scrollDown <= sectionTop + sectionHeight) {
+            sectionsClass.classList.add('active-link');
         } else {
-            sectionsClass.classList.remove('active-link')
+            sectionsClass.classList.remove('active-link');
         }                                                    
-    })
-}
-window.addEventListener('scroll', scrollActive)
+    });
+};
+window.addEventListener('scroll', scrollActive);
 
 /*=============== SCROLL REVEAL ANIMATION ===============*/
 const sr = ScrollReveal({
@@ -85,31 +89,31 @@ const sr = ScrollReveal({
     distance: '60px',
     duration: 2500,
     delay: 300,
-    // reset: true // animation repeat
-})
+    // reset: true // animation repeat (uncomment if desired)
+});
 
-sr.reveal(`.home__data, .popular__container, .footer`)
-sr.reveal(`.home__board`, {delay: 700, distance: '100px', origin: 'right'})
-sr.reveal(`.home__chapati`, {delay: 1400, distance: '100px', origin: 'bottom', rotate:{z: -90}})
-sr.reveal(`.home__ingredient`, {delay: 2000, interval: 100})
-sr.reveal(`.about__data, .recipe__list, .contact__data`, {origin: 'right'})
-sr.reveal(`.about__img, .recipe__img, .contact__image`, {origin: 'left'})
-sr.reveal(`.products__card`, {interval: 100})
+sr.reveal(`.home__data, .popular__container, .footer`);
+sr.reveal(`.home__board`, { delay: 700, distance: '100px', origin: 'right' });
+sr.reveal(`.home__chapati`, { delay: 1400, distance: '100px', origin: 'bottom', rotate: { z: -90 } });
+sr.reveal(`.home__ingredient`, { delay: 2000, interval: 100 });
+sr.reveal(`.about__data, .recipe__list, .contact__data`, { origin: 'right' });
+sr.reveal(`.about__img, .recipe__img, .contact__image`, { origin: 'left' });
+sr.reveal(`.products__card`, { interval: 100 });
 
 /*=============== EmailJS ===============*/
 const emailInput = document.getElementById('email');
 const formMessage = document.getElementById('form-message');
 
 // Load EmailJS configuration from environment variables
-const emailServiceID    = process.env.EMAILJS_SERVICE_ID;
-const emailTemplateID1  = process.env.EMAILJS_TEMPLATE_ID_1;
-const emailTemplateID2  = process.env.EMAILJS_TEMPLATE_ID_2;
+const emailServiceID   = process.env.EMAILJS_SERVICE_ID;
+const emailTemplateID1 = process.env.EMAILJS_TEMPLATE_ID_1;
+const emailTemplateID2 = process.env.EMAILJS_TEMPLATE_ID_2;
 
 // Real-time email validation
 emailInput.addEventListener('input', function() {
     const email = this.value.trim();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
+    
     if (email === '') {
         formMessage.textContent = '';
         formMessage.style.display = 'none';
@@ -129,7 +133,7 @@ document.getElementById('newsletter-form').addEventListener('submit', function(e
     e.preventDefault();
     const email = emailInput.value.trim();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
+    
     if (!emailRegex.test(email)) {
         formMessage.textContent = 'Please enter a valid email address';
         formMessage.style.color = 'red';
@@ -137,7 +141,7 @@ document.getElementById('newsletter-form').addEventListener('submit', function(e
         emailInput.focus();
         return;
     }
-
+    
     // EmailJS sending logic using environment variables for keys
     emailjs.send(emailServiceID, emailTemplateID1, { user_email: email })
     .then(() => emailjs.send(emailServiceID, emailTemplateID2, { user_email: email }))
@@ -146,7 +150,6 @@ document.getElementById('newsletter-form').addEventListener('submit', function(e
         formMessage.style.color = 'green';
         formMessage.style.display = 'block';
         this.reset();
-
         // Clear message after 2 seconds
         setTimeout(() => {
             formMessage.textContent = '';
@@ -169,7 +172,6 @@ document.addEventListener('DOMContentLoaded', function() {
     phoneButtons.forEach(button => {
         button.addEventListener('click', function(e) {
             const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-            
             if (isMobile) {
                 // Mobile: Confirm before calling
                 if (confirm('Call Kritika Home Food?\n' + phoneNumber)) {
@@ -204,7 +206,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             });
         });
-        
         lazyImages.forEach(image => {
             lazyImageObserver.observe(image);
         });
@@ -216,4 +217,3 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
-

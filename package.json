@@ -26,6 +26,7 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "emailjs-com": "^3.2.0",
     "scrollreveal": "^4.0.9",
     "swiper": "^11.2.2"
