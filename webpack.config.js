@@ -54,16 +54,19 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         { from: 'assets/img', to: 'assets/img' },
-        { from: 'assets/css', to: 'assets/css' }
+        { from: 'assets/css', to: 'assets/css' },
+        { from: 'node_modules/swiper/swiper-bundle.min.css', to: 'assets/css/swiper-bundle.min.css' }
       ]
     }),
     new webpack.ProvidePlugin({
-      ScrollReveal: ['scrollreveal', 'default']  // Updated this line
+      ScrollReveal: ['scrollreveal', 'default'],
+      Swiper: ['swiper', 'default']
     })
   ],
   resolve: {
     alias: {
-      scrollreveal: 'scrollreveal'
+      'scrollreveal': 'scrollreveal',
+      'swiper': 'swiper'
     }
   },
   optimization: {

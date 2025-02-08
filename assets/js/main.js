@@ -1,4 +1,4 @@
-import ScrollReveal from 'scrollreveal';
+import Swiper from 'swiper';
 
 // Initialize EmailJS
 emailjs.init(process.env.EMAILJS_PUBLIC_KEY || "_1x8c2wIGn-ACFKW2");
