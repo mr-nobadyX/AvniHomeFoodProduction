@@ -400,109 +400,66 @@ img {
 }
 
 /*=============== POPULAR ===============*/
-.popular__container {
+.popular__container{
   grid-template-columns: 100%;
   row-gap: 3rem;
-  padding-block: 2rem;
-  position: relative;
+  padding-bottom: 2rem;
 }
 
-/* Popular section header */
-.popular__data {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.section__title {
+.popular__data, .section__title{
   margin-bottom: 1rem;
 }
 
-.popular__description {
+.popular__description{
   text-align: center;
-  max-width: 600px;
-  margin-inline: auto;
 }
 
-/* Swiper container and elements */
-.popular__swiper {
+.popular__swiper{
   position: relative;
-  padding-top: 3rem;  /* Space for the dish image */
-  overflow: hidden;
 }
 
-.popular__dish {
+.popular__dish{
   width: 200px;
   filter: var(--shadow-big-img);
   position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1;
+  inset: 0;
+  /* top: -.85rem; */
+  margin-inline: auto;
 }
 
-/* Card styling */
-.popular__card {
+.popular__card,
+.popular__img{
   width: 200px;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: transform .3s ease;
 }
 
-.popular__card:hover {
-  transform: translateY(-0.5rem);
-}
-
-.popular__img {
+.popular__img{
   width: 400px;
-  transform: scale(0.8) rotate(-90deg);
-  transition: transform .4s ease;
 }
 
-.popular__title {
+.popular__img{
+  transform: scale(.8) rotate(-90deg);
+  transition: transform .4s;
+}
+
+.popular__title{
   font-size: var(--h3-font-size);
   color: var(--first-color);
   margin-top: 2rem;
   text-align: center;
   opacity: 0;
-  transition: opacity .4s ease;
+  transition: opacity .4s;
 }
-
-/* Swiper specific styles */
-.swiper {
+/* Swiper class */
+.swiper{
   margin-inline: initial;
   overflow: visible;
-  padding-inline: 1rem;
 }
 
-/* Navigation buttons */
-.swiper-button-next,
-.swiper-button-prev {
-  background-color: var(--first-color);
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  color: var(--white-color);
-  transition: background-color .3s;
-}
-
-.swiper-button-next::after,
-.swiper-button-prev::after {
-  font-size: 1.2rem;
-}
-
-.swiper-button-next:hover,
-.swiper-button-prev:hover {
-  background-color: var(--first-color-alt);
-}
-
-/* Active slide animations */
-:is(.swiper-slide-active, .swiper-slide-duplicate-active) .popular__img {
+:is(.swiper-slide-active, .swiper-slide-duplicate-active) .popular__img{
   transform: scale(1) rotate(0);
 }
 
-:is(.swiper-slide-active, .swiper-slide-duplicate-active) .popular__title {
+:is(.swiper-slide-active, .swiper-slide-duplicate-active) .popular__title{
   opacity: 1;
 }
 
@@ -1150,7 +1107,7 @@ img {
   }
 
   .contact__img{
-    width: 380px;
+    width: 350px;
   }
 
   .contact__image{
