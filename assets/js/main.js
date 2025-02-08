@@ -42,54 +42,12 @@ const initHeaderShadow = () => {
 };
 
 /*=============== SWIPER POPULAR ===============*/
-const initSwiper = () => {
-    const swiperContainer = document.querySelector('.popular__swiper');
-    if (!swiperContainer) {
-        console.warn("No popular swiper container found.");
-        return;
-    }
-    // IMPORTANT: Ensure your HTML uses the correct <article> tag for each slide (not <artical>)
-    const swiperSlides = swiperContainer.querySelectorAll('.swiper-slide');
-    const enableLoop = swiperSlides.length > 1;
-
-    const swiperPopular = new Swiper(swiperContainer, {
-        effect: 'coverflow',
-        grabCursor: true,
-        centeredSlides: true,
-        slidesPerView: 'auto',
-        loop: enableLoop,
-        spaceBetween: 32,
-        coverflowEffect: {
-            rotate: 0,
-            stretch: 0,
-            depth: 100,
-            modifier: 1,
-            slideShadows: false,
-        },
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-        breakpoints: {
-            576: {
-                slidesPerView: 2,
-                spaceBetween: 24,
-            },
-            768: {
-                slidesPerView: 2,
-                spaceBetween: 32,
-            },
-            1024: {
-                slidesPerView: 3,
-                spaceBetween: 32,
-            },
-        },
-    });
-
-    if (!enableLoop) {
-        console.warn("Swiper Loop Warning: Not enough slides for loop mode. Loop has been disabled.");
-    }
-};
+const swiperPopular = new Swiper('.popular__swiper', {
+    loop: true,
+    grabCursor: true,
+    slidesPerView: 'auto',
+    centeredSlides:'auto',
+  })
 
 /*=============== SCROLL UP BUTTON ===============*/
 const initScrollUp = () => {
