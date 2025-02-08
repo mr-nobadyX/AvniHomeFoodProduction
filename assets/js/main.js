@@ -1,5 +1,7 @@
 import Swiper from 'swiper/bundle';
-import 'swiper/swiper-bundle.min.css'; // Correct CSS import
+import 'swiper/css';                     // Base Swiper CSS
+import 'swiper/css/navigation';          // Swiper navigation styles
+import 'swiper/css/effect-coverflow';    // Swiper coverflow effect styles
 import ScrollReveal from 'scrollreveal';
 import emailjs from '@emailjs/browser';
 
@@ -23,7 +25,7 @@ const initMenu = () => {
         navClose.addEventListener('click', () => navMenu.classList.remove('show-menu'));
     }
 
-    // Hide menu on link click
+    // Hide menu when clicking links
     navLinks.forEach(link => {
         link.addEventListener('click', () => navMenu.classList.remove('show-menu'));
     });
@@ -46,20 +48,41 @@ const initSwiper = () => {
         console.warn("No popular swiper container found.");
         return;
     }
-
+    // IMPORTANT: Ensure your HTML uses the correct <article> tag for each slide (not <artical>)
     const swiperSlides = swiperContainer.querySelectorAll('.swiper-slide');
     const enableLoop = swiperSlides.length > 1;
 
-    new Swiper(swiperContainer, {
-        loop: enableLoop,
+    const swiperPopular = new Swiper(swiperContainer, {
+        effect: 'coverflow',
         grabCursor: true,
-        slidesPerView: 'auto',
         centeredSlides: true,
-        spaceBetween: 20,
+        slidesPerView: 'auto',
+        loop: enableLoop,
+        spaceBetween: 32,
+        coverflowEffect: {
+            rotate: 0,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows: false,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
         breakpoints: {
-            576: { slidesPerView: 2 },
-            768: { slidesPerView: 3 },
-            1024: { slidesPerView: 4 },
+            576: {
+                slidesPerView: 2,
+                spaceBetween: 24,
+            },
+            768: {
+                slidesPerView: 2,
+                spaceBetween: 32,
+            },
+            1024: {
+                slidesPerView: 3,
+                spaceBetween: 32,
+            },
         },
     });
 
@@ -81,6 +104,7 @@ const initScrollUp = () => {
 /*=============== ACTIVE LINK HIGHLIGHTING ===============*/
 const initActiveLinks = () => {
     const sections = document.querySelectorAll('section[id]');
+    
     window.addEventListener('scroll', () => {
         const scrollY = window.scrollY;
         sections.forEach(section => {
@@ -88,6 +112,7 @@ const initActiveLinks = () => {
             const sectionTop = section.offsetTop - 58;
             const sectionId = section.getAttribute('id');
             const navLink = document.querySelector(`.nav__menu a[href*=${sectionId}]`);
+            
             if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
                 navLink?.classList.add('active-link');
             } else {
@@ -109,7 +134,12 @@ const initScrollReveal = () => {
     // Home section animations
     sr.reveal('.home__data, .popular__container, .footer');
     sr.reveal('.home__board', { delay: 700, distance: '100px', origin: 'right' });
-    sr.reveal('.home__chapati', { delay: 1400, distance: '100px', origin: 'bottom', rotate: { z: -90 } });
+    sr.reveal('.home__chapati', { 
+        delay: 1400, 
+        distance: '100px', 
+        origin: 'bottom', 
+        rotate: { z: -90 } 
+    });
     sr.reveal('.home__ingredient', { delay: 2000, interval: 100 });
 
     // Other sections animations
@@ -123,7 +153,7 @@ const initEmailFeatures = () => {
     const emailInput = document.getElementById('email');
     const formMessage = document.getElementById('form-message');
     const newsletterForm = document.getElementById('newsletter-form');
-
+    
     // Email validation helper
     const validateEmail = (email) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -131,7 +161,7 @@ const initEmailFeatures = () => {
     };
 
     // Real-time email validation
-    emailInput?.addEventListener('input', function () {
+    emailInput?.addEventListener('input', function() {
         const email = this.value.trim();
         if (email === '') {
             formMessage.textContent = '';
@@ -139,14 +169,14 @@ const initEmailFeatures = () => {
         } else {
             formMessage.style.display = 'block';
             formMessage.style.color = validateEmail(email) ? 'green' : 'red';
-            formMessage.textContent = validateEmail(email)
-                ? 'Valid email address'
+            formMessage.textContent = validateEmail(email) 
+                ? 'Valid email address' 
                 : 'Please enter a valid email address';
         }
     });
 
     // Form submission handler
-    newsletterForm?.addEventListener('submit', async function (e) {
+    newsletterForm?.addEventListener('submit', async function(e) {
         e.preventDefault();
         const email = emailInput.value.trim();
         if (!validateEmail(email)) {
@@ -159,12 +189,12 @@ const initEmailFeatures = () => {
         try {
             await emailjs.send(process.env.EMAILJS_SERVICE_ID, process.env.EMAILJS_TEMPLATE_ID_1, { user_email: email });
             await emailjs.send(process.env.EMAILJS_SERVICE_ID, process.env.EMAILJS_TEMPLATE_ID_2, { user_email: email });
-
+            
             formMessage.textContent = 'Thank you for subscribing!';
             formMessage.style.color = 'green';
             formMessage.style.display = 'block';
             this.reset();
-
+            
             setTimeout(() => {
                 formMessage.style.display = 'none';
             }, 2000);
@@ -181,7 +211,7 @@ const initEmailFeatures = () => {
 const initPhoneFeature = () => {
     const phoneButtons = document.querySelectorAll('.products__button');
     const phoneNumber = '+91-6360170572';
-
+    
     phoneButtons.forEach(button => {
         button.addEventListener('click', (e) => {
             const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
