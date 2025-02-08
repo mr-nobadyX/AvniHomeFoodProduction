@@ -46,7 +46,7 @@ const initSwiper = () => {
         console.warn("No popular swiper container found.");
         return;
     }
-    // Query slides within the container
+    // IMPORTANT: Ensure your HTML uses the correct tag <article> for each slide (not <artical>)
     const swiperSlides = swiperContainer.querySelectorAll('.swiper-slide');
     const enableLoop = swiperSlides.length > 1;
 
@@ -65,7 +65,7 @@ const initSwiper = () => {
             slideShadows: false,
         },
         navigation: {
-            nextEl: '.swiper-button-next',
+            nextEl: '.swiper-button-next',  // Make sure these exist in your HTML if you use them
             prevEl: '.swiper-button-prev',
         },
         breakpoints: {
@@ -102,7 +102,6 @@ const initScrollUp = () => {
 /*=============== ACTIVE LINK HIGHLIGHTING ===============*/
 const initActiveLinks = () => {
     const sections = document.querySelectorAll('section[id]');
-    
     window.addEventListener('scroll', () => {
         const scrollY = window.scrollY;
         sections.forEach(section => {
@@ -110,7 +109,6 @@ const initActiveLinks = () => {
             const sectionTop = section.offsetTop - 58;
             const sectionId = section.getAttribute('id');
             const navLink = document.querySelector(`.nav__menu a[href*=${sectionId}]`);
-            
             if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
                 navLink?.classList.add('active-link');
             } else {
@@ -152,16 +150,15 @@ const initEmailFeatures = () => {
     const formMessage = document.getElementById('form-message');
     const newsletterForm = document.getElementById('newsletter-form');
     
-    // Email validation
+    // Email validation helper
     const validateEmail = (email) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
     };
 
-    // Real-time validation
+    // Real-time email validation
     emailInput?.addEventListener('input', function() {
         const email = this.value.trim();
-        
         if (email === '') {
             formMessage.textContent = '';
             formMessage.style.display = 'none';
@@ -174,11 +171,10 @@ const initEmailFeatures = () => {
         }
     });
 
-    // Form submission
+    // Form submission handler
     newsletterForm?.addEventListener('submit', async function(e) {
         e.preventDefault();
         const email = emailInput.value.trim();
-        
         if (!validateEmail(email)) {
             formMessage.textContent = 'Please enter a valid email address';
             formMessage.style.color = 'red';
@@ -186,14 +182,9 @@ const initEmailFeatures = () => {
             emailInput.focus();
             return;
         }
-
         try {
-            await emailjs.send(process.env.EMAILJS_SERVICE_ID, 
-                             process.env.EMAILJS_TEMPLATE_ID_1, 
-                             { user_email: email });
-            await emailjs.send(process.env.EMAILJS_SERVICE_ID, 
-                             process.env.EMAILJS_TEMPLATE_ID_2, 
-                             { user_email: email });
+            await emailjs.send(process.env.EMAILJS_SERVICE_ID, process.env.EMAILJS_TEMPLATE_ID_1, { user_email: email });
+            await emailjs.send(process.env.EMAILJS_SERVICE_ID, process.env.EMAILJS_TEMPLATE_ID_2, { user_email: email });
             
             formMessage.textContent = 'Thank you for subscribing!';
             formMessage.style.color = 'green';
@@ -219,9 +210,7 @@ const initPhoneFeature = () => {
     
     phoneButtons.forEach(button => {
         button.addEventListener('click', (e) => {
-            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i
-                .test(navigator.userAgent);
-
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
             if (isMobile && confirm(`Call Kritika Home Food?\n${phoneNumber}`)) {
                 window.location.href = `tel:${phoneNumber}`;
             } else if (!isMobile) {
@@ -235,7 +224,6 @@ const initPhoneFeature = () => {
 /*=============== LAZY LOADING IMAGES ===============*/
 const initLazyLoading = () => {
     const lazyImages = document.querySelectorAll('img[data-src]');
-    
     if ('IntersectionObserver' in window) {
         const lazyImageObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
@@ -247,7 +235,6 @@ const initLazyLoading = () => {
                 }
             });
         });
-        
         lazyImages.forEach(img => lazyImageObserver.observe(img));
     } else {
         // Fallback for older browsers
