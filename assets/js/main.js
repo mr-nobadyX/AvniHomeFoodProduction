@@ -41,10 +41,16 @@ const initHeaderShadow = () => {
 
 /*=============== SWIPER POPULAR ===============*/
 const initSwiper = () => {
-    const swiperSlides = document.querySelectorAll('.popular__swiper .swiper-slide');
+    const swiperContainer = document.querySelector('.popular__swiper');
+    if (!swiperContainer) {
+        console.warn("No popular swiper container found.");
+        return;
+    }
+    // Query slides within the container
+    const swiperSlides = swiperContainer.querySelectorAll('.swiper-slide');
     const enableLoop = swiperSlides.length > 1;
 
-    const swiperPopular = new Swiper('.popular__swiper', {
+    const swiperPopular = new Swiper(swiperContainer, {
         effect: 'coverflow',
         grabCursor: true,
         centeredSlides: true,
@@ -104,7 +110,7 @@ const initActiveLinks = () => {
             const sectionTop = section.offsetTop - 58;
             const sectionId = section.getAttribute('id');
             const navLink = document.querySelector(`.nav__menu a[href*=${sectionId}]`);
-
+            
             if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
                 navLink?.classList.add('active-link');
             } else {
