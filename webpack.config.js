@@ -36,13 +36,12 @@ module.exports = {
     ]
   },
   plugins: [
-    new Dotenv(), // Loads environment variables from .env
+    new Dotenv(),
     new webpack.DefinePlugin({
       'process.env.EMAILJS_SERVICE_ID': JSON.stringify(process.env.EMAILJS_SERVICE_ID || 'service_o7bitcp'),
-      'process.env.EMAILJS_ADMIN_TEMPLATE_ID': JSON.stringify(process.env.EMAILJS_ADMIN_TEMPLATE_ID || 'template_tk0dd8b'),
-      'process.env.EMAILJS_USER_TEMPLATE_ID': JSON.stringify(process.env.EMAILJS_USER_TEMPLATE_ID || 'template_8z15503'),
-      'process.env.EMAILJS_PUBLIC_KEY': JSON.stringify(process.env.EMAILJS_PUBLIC_KEY || '_1x8c2wIGn-ACFKW2'),
-      'process.env.ADMIN_EMAIL': JSON.stringify(process.env.ADMIN_EMAIL || 'kritikahomefood@gmail.com')
+      'process.env.EMAILJS_TEMPLATE_ID_1': JSON.stringify(process.env.EMAILJS_TEMPLATE_ID_1 || 'template_tk0dd8b'),
+      'process.env.EMAILJS_TEMPLATE_ID_2': JSON.stringify(process.env.EMAILJS_TEMPLATE_ID_2 || 'template_8z15503'),
+      'process.env.EMAILJS_PUBLIC_KEY': JSON.stringify(process.env.EMAILJS_PUBLIC_KEY || '_1x8c2wIGn-ACFKW2')
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'index.html'),
@@ -55,13 +54,11 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         { from: 'assets/img', to: 'assets/img' },
-        { from: 'assets/css', to: 'assets/css' },
-        { from: 'assets/js',  to: 'assets/js' } // <-- Added rule to copy your JS libraries
+        { from: 'assets/css', to: 'assets/css' }
       ]
     }),
-    // Make ScrollReveal available globally
     new webpack.ProvidePlugin({
-      ScrollReveal: 'scrollreveal'
+      ScrollReveal: ['scrollreveal', 'default']  // Updated this line
     })
   ],
   resolve: {

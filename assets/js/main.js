@@ -1,5 +1,7 @@
-// init EmailJS
-emailjs.init("_1x8c2wIGn-ACFKW2");
+import ScrollReveal from 'scrollreveal';
+
+// Initialize EmailJS
+emailjs.init(process.env.EMAILJS_PUBLIC_KEY || "_1x8c2wIGn-ACFKW2");
 
 /*=============== SHOW MENU ===============*/
 const navMenu = document.getElementById('nav-menu'),
