@@ -55,7 +55,8 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         { from: 'assets/img', to: 'assets/img' },
-        { from: 'assets/css', to: 'assets/css' }
+        { from: 'assets/css', to: 'assets/css' },
+        { from: 'assets/js',  to: 'assets/js' } // <-- Added rule to copy your JS libraries
       ]
     }),
     // Make ScrollReveal available globally
