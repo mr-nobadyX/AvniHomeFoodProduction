@@ -1,7 +1,7 @@
 import Swiper from 'swiper/bundle';
-import 'swiper/css';                     // Base Swiper CSS
-import 'swiper/css/navigation';          // Swiper navigation styles
-import 'swiper/css/effect-coverflow';    // Swiper coverflow effect styles
+import 'swiper/css';                     
+import 'swiper/css/navigation';          
+import 'swiper/css/effect-coverflow';    
 import ScrollReveal from 'scrollreveal';
 import emailjs from '@emailjs/browser';
 
@@ -15,15 +15,16 @@ const initMenu = () => {
     const navClose = document.getElementById('nav-close');
     const navLinks = document.querySelectorAll('.nav__link');
 
-    // Show menu
-    if (navToggle) {
-        navToggle.addEventListener('click', () => navMenu.classList.add('show-menu'));
+    if (!navMenu || !navToggle || !navClose) {
+        console.warn('Menu elements not found');
+        return;
     }
 
+    // Show menu
+    navToggle.addEventListener('click', () => navMenu.classList.add('show-menu'));
+
     // Hide menu
-    if (navClose) {
-        navClose.addEventListener('click', () => navMenu.classList.remove('show-menu'));
-    }
+    navClose.addEventListener('click', () => navMenu.classList.remove('show-menu'));
 
     // Hide menu when clicking links
     navLinks.forEach(link => {
@@ -34,37 +35,71 @@ const initMenu = () => {
 /*=============== HEADER SHADOW ===============*/
 const initHeaderShadow = () => {
     const header = document.getElementById('header');
-    window.addEventListener('scroll', () => {
-        window.scrollY >= 50
-            ? header.classList.add('shadow-header')
-            : header.classList.remove('shadow-header');
-    });
+    if (!header) return;
+
+    const toggleHeaderShadow = () => {
+        header.classList.toggle('shadow-header', window.scrollY >= 50);
+    };
+
+    window.addEventListener('scroll', toggleHeaderShadow);
 };
 
 /*=============== SWIPER POPULAR ===============*/
-const swiperPopular = new Swiper('.popular__swiper', {
-    loop: true,
-    grabCursor: true,
-    slidesPerView: 'auto',
-    centeredSlides:'auto',
-  })
+const initSwiper = () => {
+    try {
+        const popularSwiper = new Swiper('.popular__swiper', {
+            loop: true,
+            grabCursor: true,
+            slidesPerView: 1,
+            centeredSlides: true,
+            spaceBetween: 30,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
+                968: {
+                    slidesPerView: 3,
+                    spaceBetween: 30,
+                },
+            },
+        });
+    } catch (error) {
+        console.error('Error initializing Swiper:', error);
+    }
+};
 
 /*=============== SCROLL UP BUTTON ===============*/
 const initScrollUp = () => {
     const scrollUp = document.getElementById('scroll-up');
-    window.addEventListener('scroll', () => {
-        window.scrollY >= 350
-            ? scrollUp.classList.add('show-scroll')
-            : scrollUp.classList.remove('show-scroll');
-    });
+    if (!scrollUp) return;
+
+    const toggleScrollUp = () => {
+        scrollUp.classList.toggle('show-scroll', window.scrollY >= 350);
+    };
+
+    window.addEventListener('scroll', toggleScrollUp);
 };
 
 /*=============== ACTIVE LINK HIGHLIGHTING ===============*/
 const initActiveLinks = () => {
     const sections = document.querySelectorAll('section[id]');
     
-    window.addEventListener('scroll', () => {
+    const toggleActiveLink = () => {
         const scrollY = window.scrollY;
+
         sections.forEach(section => {
             const sectionHeight = section.offsetHeight;
             const sectionTop = section.offsetTop - 58;
@@ -77,33 +112,53 @@ const initActiveLinks = () => {
                 navLink?.classList.remove('active-link');
             }
         });
-    });
+    };
+
+    window.addEventListener('scroll', toggleActiveLink);
 };
 
 /*=============== SCROLL REVEAL ANIMATION ===============*/
 const initScrollReveal = () => {
-    const sr = ScrollReveal({
-        origin: 'top',
-        distance: '60px',
-        duration: 2500,
-        delay: 300,
-    });
+    try {
+        const sr = ScrollReveal({
+            origin: 'top',
+            distance: '60px',
+            duration: 2500,
+            delay: 300,
+            reset: false
+        });
 
-    // Home section animations
-    sr.reveal('.home__data, .popular__container, .footer');
-    sr.reveal('.home__board', { delay: 700, distance: '100px', origin: 'right' });
-    sr.reveal('.home__chapati', { 
-        delay: 1400, 
-        distance: '100px', 
-        origin: 'bottom', 
-        rotate: { z: -90 } 
-    });
-    sr.reveal('.home__ingredient', { delay: 2000, interval: 100 });
+        // Home section animations
+        sr.reveal('.home__data, .popular__container, .footer');
+        sr.reveal('.home__board', { 
+            delay: 700, 
+            distance: '100px', 
+            origin: 'right' 
+        });
+        sr.reveal('.home__chapati', { 
+            delay: 1400, 
+            distance: '100px', 
+            origin: 'bottom', 
+            rotate: { z: -90 } 
+        });
+        sr.reveal('.home__ingredient', { 
+            delay: 2000, 
+            interval: 100 
+        });
 
-    // Other sections animations
-    sr.reveal('.about__data, .recipe__list, .contact__data', { origin: 'right' });
-    sr.reveal('.about__img, .recipe__img, .contact__image', { origin: 'left' });
-    sr.reveal('.products__card', { interval: 100 });
+        // Other sections animations
+        sr.reveal('.about__data, .recipe__list, .contact__data', { 
+            origin: 'right' 
+        });
+        sr.reveal('.about__img, .recipe__img, .contact__image', { 
+            origin: 'left' 
+        });
+        sr.reveal('.products__card', { 
+            interval: 100 
+        });
+    } catch (error) {
+        console.error('Error initializing ScrollReveal:', error);
+    }
 };
 
 /*=============== EMAIL FUNCTIONALITY ===============*/
@@ -112,31 +167,27 @@ const initEmailFeatures = () => {
     const formMessage = document.getElementById('form-message');
     const newsletterForm = document.getElementById('newsletter-form');
     
-    // Email validation helper
+    if (!emailInput || !formMessage || !newsletterForm) return;
+
     const validateEmail = (email) => {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     };
 
-    // Real-time email validation
-    emailInput?.addEventListener('input', function() {
+    emailInput.addEventListener('input', function() {
         const email = this.value.trim();
-        if (email === '') {
-            formMessage.textContent = '';
-            formMessage.style.display = 'none';
-        } else {
-            formMessage.style.display = 'block';
-            formMessage.style.color = validateEmail(email) ? 'green' : 'red';
-            formMessage.textContent = validateEmail(email) 
-                ? 'Valid email address' 
-                : 'Please enter a valid email address';
+        
+        formMessage.style.display = email ? 'block' : 'none';
+        if (email) {
+            const isValid = validateEmail(email);
+            formMessage.style.color = isValid ? 'green' : 'red';
+            formMessage.textContent = isValid ? 'Valid email address' : 'Please enter a valid email address';
         }
     });
 
-    // Form submission handler
-    newsletterForm?.addEventListener('submit', async function(e) {
+    newsletterForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         const email = emailInput.value.trim();
+
         if (!validateEmail(email)) {
             formMessage.textContent = 'Please enter a valid email address';
             formMessage.style.color = 'red';
@@ -144,9 +195,12 @@ const initEmailFeatures = () => {
             emailInput.focus();
             return;
         }
+
         try {
-            await emailjs.send(process.env.EMAILJS_SERVICE_ID, process.env.EMAILJS_TEMPLATE_ID_1, { user_email: email });
-            await emailjs.send(process.env.EMAILJS_SERVICE_ID, process.env.EMAILJS_TEMPLATE_ID_2, { user_email: email });
+            await Promise.all([
+                emailjs.send(process.env.EMAILJS_SERVICE_ID, process.env.EMAILJS_TEMPLATE_ID_1, { user_email: email }),
+                emailjs.send(process.env.EMAILJS_SERVICE_ID, process.env.EMAILJS_TEMPLATE_ID_2, { user_email: email })
+            ]);
             
             formMessage.textContent = 'Thank you for subscribing!';
             formMessage.style.color = 'green';
@@ -173,6 +227,7 @@ const initPhoneFeature = () => {
     phoneButtons.forEach(button => {
         button.addEventListener('click', (e) => {
             const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            
             if (isMobile && confirm(`Call Kritika Home Food?\n${phoneNumber}`)) {
                 window.location.href = `tel:${phoneNumber}`;
             } else if (!isMobile) {
@@ -186,6 +241,7 @@ const initPhoneFeature = () => {
 /*=============== LAZY LOADING IMAGES ===============*/
 const initLazyLoading = () => {
     const lazyImages = document.querySelectorAll('img[data-src]');
+    
     if ('IntersectionObserver' in window) {
         const lazyImageObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
@@ -197,6 +253,7 @@ const initLazyLoading = () => {
                 }
             });
         });
+
         lazyImages.forEach(img => lazyImageObserver.observe(img));
     } else {
         // Fallback for older browsers
@@ -208,14 +265,21 @@ const initLazyLoading = () => {
 };
 
 /*=============== INITIALIZE ALL FEATURES ===============*/
-document.addEventListener('DOMContentLoaded', () => {
-    initMenu();
-    initHeaderShadow();
-    initSwiper();
-    initScrollUp();
-    initActiveLinks();
-    initScrollReveal();
-    initEmailFeatures();
-    initPhoneFeature();
-    initLazyLoading();
-});
+const initializeApp = () => {
+    try {
+        initMenu();
+        initHeaderShadow();
+        initSwiper();
+        initScrollUp();
+        initActiveLinks();
+        initScrollReveal();
+        initEmailFeatures();
+        initPhoneFeature();
+        initLazyLoading();
+    } catch (error) {
+        console.error('Error during initialization:', error);
+    }
+};
+
+// Initialize when DOM is ready
+document.addEventListener('DOMContentLoaded', initializeApp);
