@@ -48,14 +48,15 @@ const initHeaderShadow = () => {
 const initSwiper = () => {
     try {
         const popularSwiper = new Swiper('.popular__swiper', {
-            loop: true,
+            loop: false,  // Changed from true to false
             grabCursor: true,
-            slidesPerView: 1,
-            centeredSlides: true,
-            spaceBetween: 30,
+            slidesPerView: "auto",  // Changed to auto
+            centeredSlides: false,  // Changed to false
+            spaceBetween: 20,
             autoplay: {
                 delay: 3000,
                 disableOnInteraction: false,
+                pauseOnMouseEnter: true
             },
             pagination: {
                 el: '.swiper-pagination',
@@ -66,6 +67,10 @@ const initSwiper = () => {
                 prevEl: '.swiper-button-prev',
             },
             breakpoints: {
+                320: {
+                    slidesPerView: 1,
+                    spaceBetween: 15,
+                },
                 640: {
                     slidesPerView: 2,
                     spaceBetween: 20,
