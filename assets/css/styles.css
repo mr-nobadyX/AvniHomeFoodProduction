@@ -722,6 +722,12 @@ img {
   border-radius: 4rem;
 }
 
+.door__step{
+  color: var(--first-color);
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
 .footer__input{
   width: 100%;
   background: transparent;
@@ -1084,6 +1090,10 @@ img {
     top: -4rem;
   }
 
+  .title__x{
+    font-size: 1.2rem;
+    font-family: var(--second-font);
+  }
   .products__name{
     font-size: var(--h2-font-size);
   }
@@ -1175,6 +1185,16 @@ img {
 
   .footer__content div:nth-child(1){
     justify-self: start;
+  }
+
+  .copy{
+    color: var(--first-color);
+    margin-bottom: -2rem;
+
+  }
+
+  .contact__delivery{
+    margin-left: -5rem;
   }
 
   .scrollup{
