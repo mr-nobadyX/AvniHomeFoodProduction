@@ -137,5 +137,5 @@ Kritika Home Food is a showcase website dedicated to displaying a range of fresh
 
 ### **Conclusion**
 
-Kritika Home Food is designed as a modern, responsive, and user-friendly platform to showcase a range of fresh, homemade chapatis and related food items. With advanced features like interactive sliders, lazy loading, and a seamless email contact form, the website is built to provide a rich customer experience. Future enhancements and backend integrations will further enable the site to scale and meet growing customer demands.
+Avni Home Food is designed as a modern, responsive, and user-friendly platform to showcase a range of fresh, homemade chapatis and related food items. With advanced features like interactive sliders, lazy loading, and a seamless email contact form, the website is built to provide a rich customer experience. Future enhancements and backend integrations will further enable the site to scale and meet growing customer demands.
 
