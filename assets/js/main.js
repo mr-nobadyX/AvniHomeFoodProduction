@@ -233,7 +233,7 @@ const initPhoneFeature = () => {
         button.addEventListener('click', (e) => {
             const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
             
-            if (isMobile && confirm(`Call Kritika Home Food?\n${phoneNumber}`)) {
+            if (isMobile && confirm(`Call Avni Home Food?\n${phoneNumber}`)) {
                 window.location.href = `tel:${phoneNumber}`;
             } else if (!isMobile) {
                 e.preventDefault();
