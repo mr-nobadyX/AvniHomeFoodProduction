@@ -1,7 +1,7 @@
 {
-  "name": "kritikahomefood",
+  "name": "Avnihomefood",
   "version": "1.0.0",
-  "description": "Kritika Home Food production ready build",
+  "description": "Avni Home Food production ready build",
   "main": "index.js",
   "scripts": {
     "clean": "rm -rf dist",
