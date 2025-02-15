@@ -13,7 +13,7 @@ Avni Home Food is a showcase website dedicated to displaying a range of freshly 
 ### **Technologies Used**
 
 #### **Front-End**
-- **HTML5**: Provides the semantic structure for the website.
+- **HTML5**: Provides the semantic structure for the website App.
 - **CSS3**: Used for styling and creating a responsive, visually appealing layout.
 - **JavaScript**: Powers interactivity (e.g., smooth scrolling, lazy loading, and dynamic content).
 - **EmailJS**: Manages email form submissions, enabling customers to reach out directly.
