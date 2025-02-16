@@ -73,7 +73,7 @@ Avni Home Food is a showcase website dedicated to displaying a range of freshly 
 - Node.js and npm installed on your development machine.
 
 #### **Getting Started**
-1. **clone the the Repository (if applicable)**:
+1. **clone the Repository (if applicable)**:
    ```bash
    git clone "YourGithubRepositoryURL"
    ```
