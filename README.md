@@ -22,7 +22,8 @@ It also includes dynamic features like smooth scrolling, lazy-loaded images, and
 - **Swiper JS**: Implements a dynamic slider for the popular chapati products.
 
 #### **Back-End**
-- Currently, the website is fully static. Future enhancements might include a Node.js backend with a database (like MongoDB) for managing orders and product data.
+- Currently, the website is fully static. Future enhancements might include a Node.js backend with a database (like MongoDB) 
+  for managing orders and product data.
 
 ---
 
