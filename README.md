@@ -75,7 +75,7 @@ A fully responsive layout with a mobile-friendly design, including a **click-to-
 #### **1. Clone the Repository**
 
 ```bash
-  git clone "https://github.com/mr-nobadyX/AvniHomeFoodProduction"
+  git clone "https://github.com/mr-nobadyX/AvniHomeFoodProduction.git"
 ```
 
 #### **2. Install Dependencies**
